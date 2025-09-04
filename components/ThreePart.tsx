@@ -24,137 +24,162 @@ const ThreePart = () => {
 
   useEffect(() => {
     // Automatically advance through the steps with delays
-    const timer1 = setTimeout(() => setStep(1), 1000);  // Show description after 1s
-    const timer2 = setTimeout(() => setStep(2), 2500);  // Show CTA and form after 2.5s
+    const timer0 = setTimeout(() => setStep(1), 500);   // Show header after 0.5s
+    const timer1 = setTimeout(() => setStep(2), 1500);  // Show description after 1.5s
+    const timer2 = setTimeout(() => setStep(3), 3000);  // Show CTA and form after 3s
 
     return () => {
+      clearTimeout(timer0);
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
   }, []);
 
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center px-6 overflow-hidden">
-      <div className="text-center max-w-4xl space-y-12">
-        {/* Header - always visible */}
-        <div className="opacity-100 transform transition-all duration-1000">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+    <div className="w-full flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="text-center w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-4xl space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
+        {/* Header - responsive font sizes */}
+        <div className={`transition-all duration-1000 ease-out transform ${
+          step >= 1 
+            ? 'opacity-100 translate-y-0 scale-100' 
+            : 'opacity-0 translate-y-8 scale-95'
+        }`}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
             <span className="bg-gradient-to-r from-black to-gray-600 bg-clip-text text-transparent">
               AI(+)
             </span>
           </h1>
         </div>
 
-        {/* Description Text - appears when step >= 1 */}
-        <div className={`transition-all duration-1000 ease-out transform ${
-          step >= 1 
-            ? 'opacity-100 translate-y-0 scale-100' 
-            : 'opacity-0 translate-y-8 scale-95'
-        }`}>
-          <p className='text-center font-bold text-[32px] leading-[38px] text-[#9E1C20]'>New blood is rare.</p> 
-          <p className="text-[32px] leading-[38px] text-[#333132] font-normal">
-            Only 07 of 80 spaces left for the ones ready to carry it.
-            <br />
-            <span className="text-gray-500">Each scroll reveals a new chapter of innovation and creativity.</span>
-          </p>
-        </div>
-
-        {/* Call to Action - appears when step >= 2 */}
+        {/* Description Text - responsive font sizes and spacing */}
         <div className={`transition-all duration-1000 ease-out transform ${
           step >= 2 
             ? 'opacity-100 translate-y-0 scale-100' 
             : 'opacity-0 translate-y-8 scale-95'
         }`}>
-          <div className="space-y-6">   
-            {/* Action buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="text-center text-[12.354px] leading-[18.825px] text-[#333132] font-normal rounded-[156.875px] border-[0.784px] border-[#333132] flex items-center gap-[3.138px] px-[7.844px] py-[7.059px]">
-                To access the event, please confirm your attendance.
-              </button>
+          <p className='text-center font-bold text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-tight sm:leading-relaxed md:leading-[38px] text-[#9E1C20] mb-2 sm:mb-3'>
+            New blood is rare.
+          </p> 
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-[32px] leading-tight sm:leading-relaxed md:leading-[38px] text-[#333132] font-normal px-2 sm:px-4">
+            This invitation is personal, non-transferable, and built exclusively for you and the future of your business.
+            <br className="hidden sm:block" />
+              </p>
+
+              <div className="flex flex-col">
+             <span className="block sm:inline text-gray-500 text-base sm:text-lg md:text-xl lg:text-2xl mt-2 sm:mt-0">
+             Your new blood type is waiting </span>
+                 <span className="block sm:inline text-gray-500 text-base sm:text-lg md:text-xl lg:text-2xl mt-2 sm:mt-0">
+          Tuesday, October 14th
+6:00 PM</span>
+
+        <span className="block sm:inline text-gray-500 text-base sm:text-lg md:text-xl lg:text-2xl mt-2 sm:mt-0">
+Claudio Bernard 111, Doctores, Cuauhtémoc, 06720 Ciudad de México, CDMX</span>
+
+          
+        </div>
+        </div>
+
+        {/* Call to Action - responsive button */}
+        <div className={`transition-all duration-1000 ease-out transform ${
+          step >= 3 
+            ? 'opacity-100 translate-y-0 scale-100' 
+            : 'opacity-0 translate-y-8 scale-95'
+        }`}>
+          <div className="space-y-4 sm:space-y-6">   
+            <div className="flex justify-center items-center">
+    <button className="flex z-50  items-center justify-center gap-[3.138px] text-xs sm:text-sm text-[#333132] font-normal rounded-full border border-[#333132] px-[8.628px] py-[7.059px] max-w-xs sm:max-w-sm hover:bg-gray-50 transition-colors">
+  <img 
+    src="./peace.svg" 
+    alt=""  
+    className="w-[16px] h-[17px] sm:w-[19px] sm:h-[20.188px]"  
+  />
+  Register Now
+</button>
             </div>
           </div>
         </div>
 
-        {/* FORM */}
-      <div className={`transition-all duration-1000 ease-out transform ${
-  step >= 2 
-    ? 'opacity-100 translate-y-0 scale-100'
-    : 'opacity-0 translate-y-8 scale-95'
-}`}>
-  <div className="max-w-sm mx-auto bg-transparent p-4">
-    <div className="space-y-4">
-      {/* Name Field */}
-      <div className="relative">
-        <div className="flex items-center border-b border-[#333132] py-1">
-          <label className="text-xs font-medium text-[#333132] uppercase tracking-wide min-w-0 flex-shrink-0">
-            NAME
-          </label>
-          <input
-            type="text"
-            value={formData.name}
-            onChange={(e) => handleInputChange('name', e.target.value)}
-            className="flex-1 bg-transparent border-0 text-[#333132] text-center text-right py-1 px-2 focus:outline-none transition-colors text-sm"
-          />
-        </div>
-      </div>
+        {/* FORM - responsive layout */}
+        <div className={`transition-all duration-1000 ease-out transform ${
+          step >= 3 
+            ? 'opacity-100 translate-y-0 scale-100'
+            : 'opacity-0 translate-y-8 scale-95'
+        }`}>
+         <div className="w-full sm:w-3/4 max-w-4xl mx-auto bg-transparent p-2 sm:p-4">
 
-      {/* Company Field */}
-      <div className="relative">
-        <div className="flex items-center border-b border-[#333132] py-1">
-          <label className="text-xs font-medium text-[#333132] uppercase tracking-wide min-w-0 flex-shrink-0">
-            COMPANY
-          </label>
-          <input
-            type="text"
-            value={formData.company}
-            onChange={(e) => handleInputChange('company', e.target.value)}
-            className="flex-1 bg-transparent border-0 text-[#333132] text-center text-right py-1 px-2 focus:outline-none transition-colors text-sm"
-          />
-        </div>
-      </div>
+            <div className="space-y-3 sm:space-y-4">
+              {/* Name Field */}
+              <div className="relative">
+                <div className="flex items-center border-b border-[#6E6D6C] py-1 sm:py-2">
+                  <label className="text-xs sm:text-sm font-medium text-[#6E6D6C] uppercase tracking-wide min-w-0 flex-shrink-0 w-20 sm:w-24 text-left">
+                    NAME
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    className="flex-1 bg-transparent border-0 text-[#6E6D6C] text-right py-1 px-2 focus:outline-none transition-colors text-sm sm:text-base"
+                  />
+                </div>
+              </div>
 
-      {/* Phone Number Field */}
-      <div className="relative">
-        <div className="flex items-center border-b border-[#333132] py-1">
-          <label className="text-xs font-medium text-[#333132] uppercase tracking-wide min-w-0 flex-shrink-0">
-            PHONE NUMBER
-          </label>
-          <input
-            type="tel"
-            value={formData.phone}
-            onChange={(e) => handleInputChange('phone', e.target.value)}
-            className="flex-1 bg-transparent border-0 text-[#333132] text-center text-right py-1 px-2 focus:outline-none transition-colors text-sm"
-          />
-        </div>
-      </div>
+              {/* Company Field */}
+              <div className="relative">
+                <div className="flex items-center border-b border-[#6E6D6C] py-1 sm:py-2">
+                  <label className="text-xs sm:text-sm font-medium text-[#6E6D6C] uppercase tracking-wide min-w-0 flex-shrink-0 w-20 sm:w-24 text-left">
+                    COMPANY
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) => handleInputChange('company', e.target.value)}
+                    className="flex-1 bg-transparent border-0 text-[#6E6D6C] text-right py-1 px-2 focus:outline-none transition-colors text-sm sm:text-base"
+                  />
+                </div>
+              </div>
 
-      {/* Email Field */}
-      <div className="relative">
-        <div className="flex items-center border-b border-[#333132] py-1">
-          <label className="text-xs font-medium text-[#333132] uppercase tracking-wide min-w-0 flex-shrink-0">
-            E-MAIL
-          </label>
-          <input
-            type="email"
-            value={formData.email}
-            onChange={(e) => handleInputChange('email', e.target.value)}
-            className="flex-1 bg-transparent border-0 text-[#333132] text-center text-right py-1 px-2 focus:outline-none transition-colors text-sm"
-          />
-        </div>
-      </div>
+              {/* Phone Number Field */}
+              <div className="relative">
+                <div className="flex items-center border-b border-[#6E6D6C] py-1 sm:py-2">
+                  <label className="text-xs sm:text-sm font-medium text-[#6E6D6C] uppercase tracking-wide min-w-0 flex-shrink-0 w-20 sm:w-24 text-left">
+                    PHONE
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    className="flex-1 bg-transparent border-0 text-[#6E6D6C] text-right py-1 px-2 focus:outline-none transition-colors text-sm sm:text-base"
+                  />
+                </div>
+              </div>
 
-      {/* Submit Button */}
-      <div className="pt-2">
-        <button
-          onClick={handleSubmit}
-          className="w-full bg-[#333132] hover:bg-[#9E1C20] text-white font-medium py-2 px-4 rounded-full transition-colors duration-200 focus:outline-none text-sm"
-        >
-          Confirm
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+              {/* Email Field */}
+              <div className="relative">
+                <div className="flex items-center border-b border-[#6E6D6C] py-1 sm:py-2">
+                  <label className="text-xs sm:text-sm font-medium text-[#6E6D6C] uppercase tracking-wide min-w-0 flex-shrink-0 w-20 sm:w-24 text-left">
+                    E-MAIL
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    className="flex-1 bg-transparent border-0 text-[#6E6D6C] text-right py-1 px-2 focus:outline-none transition-colors text-sm sm:text-base"
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-3 sm:pt-4">
+                <button
+                  onClick={handleSubmit}
+                  className="w-full bg-[#333132] hover:bg-[#9E1C20] text-white font-medium py-2 sm:py-3 px-4 rounded-full transition-colors duration-200 focus:outline-none text-sm sm:text-base"
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ const DotGrid = ({
   shockStrength = 20,
   returnDuration = 0.8,
   className = "",
-  style,
+  style,    
 }) => {
   const wrapperRef = useRef(null);
   const canvasRef = useRef(null);
